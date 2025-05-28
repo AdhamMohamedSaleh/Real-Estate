@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Spinner from "../ui/Spinner";
-import { useCurrency } from "../contexts/CurrencyContext"; // Adjust the path if needed
+import { useCurrency } from "../contexts/CurrencyContext";
 
 const URL = "https://quick-deals.net/api/product-detail/";
 
