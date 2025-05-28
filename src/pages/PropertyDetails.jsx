@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Spinner from "../ui/Spinner";
+import { useCurrency } from "../contexts/CurrencyContext"; // Adjust the path if needed
 
 const URL = "https://quick-deals.net/api/product-detail/";
 
@@ -8,6 +9,7 @@ export default function PropertyDetails() {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { convertPrice, currency } = useCurrency(); // <- Get currency name
 
   useEffect(() => {
     async function fetchProperty() {
@@ -32,12 +34,10 @@ export default function PropertyDetails() {
 
   return (
     <div className="max-w-6xl mx-auto p-4 mt-30">
-      {/* Back Button */}
       <Link to="/units" className="text-blue-600 text-sm mb-4 inline-block">
         &larr; Back to Units
       </Link>
 
-      {/* Header */}
       <div className="bg-white rounded-xl shadow overflow-hidden">
         <div className="relative">
           <img
@@ -50,13 +50,12 @@ export default function PropertyDetails() {
           </span>
         </div>
 
-        {/* Title + Actions */}
         <div className="p-6">
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-2xl font-semibold mb-2">{property.title}</h1>
               <p className="text-blue-600 text-xl font-bold mb-4">
-                ${parseFloat(property.price).toLocaleString()}
+                {convertPrice(parseFloat(property.price))} {currency}
               </p>
               <div className="flex flex-wrap gap-6 text-sm text-gray-600">
                 <div>
@@ -83,17 +82,15 @@ export default function PropertyDetails() {
             </div>
           </div>
 
-          {/* Description */}
           <div className="mt-6 text-gray-700 leading-relaxed">
             <p>{property.description}</p>
           </div>
 
-          {/* Price + Area */}
           <div className="mt-6 grid grid-cols-2 gap-4 p-4 rounded">
             <div className="bg-gray-100 p-4 rounded">
               <p className="text-gray-500 text-sm">Price</p>
               <p className="text-lg font-semibold">
-                ${parseFloat(property.price).toLocaleString()}
+                {convertPrice(parseFloat(property.price))} {currency}
               </p>
             </div>
             <div className="bg-gray-100 p-4 rounded">
@@ -106,7 +103,6 @@ export default function PropertyDetails() {
         </div>
       </div>
 
-      {/* Gallery */}
       {property.images && property.images.length > 0 && (
         <div className="mt-10">
           <h2 className="text-lg font-semibold mb-4">Gallery</h2>

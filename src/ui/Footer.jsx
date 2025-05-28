@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCurrency } from "../contexts/currencyContext";
 
 export default function Footer() {
+  const { currency, setCurrency } = useCurrency();
+
   return (
     <footer className="bg-gray-900 text-white mt-16">
       <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -48,7 +51,7 @@ export default function Footer() {
 
         <div>
           <h4 className="font-semibold mb-3">Follow Us</h4>
-          <div className="flex gap-4 text-xl">
+          <div className="flex gap-4 text-xl mb-4">
             <a href="#" className="hover:text-blue-400">
               🌐
             </a>
@@ -62,6 +65,32 @@ export default function Footer() {
               📘
             </a>
           </div>
+
+          <label
+            htmlFor="currency"
+            className="text-sm font-semibold block mb-2"
+          >
+            Currency
+          </label>
+          <select
+            id="currency"
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            className="text-white px-2 py-1 rounded text-sm"
+          >
+            <option className="text-black" value="USD">
+              USD ($)
+            </option>
+            <option className="text-black" value="EUR">
+              EUR (€)
+            </option>
+            <option className="text-black" value="SAR">
+              SAR (ر.س)
+            </option>
+            <option className="text-black" value="KWD">
+              KWD (د.ك)
+            </option>
+          </select>
         </div>
       </div>
 
@@ -71,28 +100,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-// import { Link } from "react-router-dom";
-
-// function Footer() {
-//   return (
-//     <div className="bg-gray-50 w-full flex justify-between items-center px-20 py-2 shadow-md">
-//       <img src={"/logo_black.png"} width={256} height={64} />
-
-//       <h3 className="text-gray-800">
-//         © 2025 Property Sorted. All rights reserved.
-//       </h3>
-
-//       <div className="flex gap-8">
-//         <Link to={"https://www.facebook.com/profile.php?id=100088926761727"}>
-//           <img src={"/Facebook.png"} className="w-8 h-8" />
-//         </Link>
-//         <Link to={"https://www.instagram.com/quickdeals/"}>
-//           <img src={"/Instagram.png"} className="w-8 h-8" />
-//         </Link>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Footer;

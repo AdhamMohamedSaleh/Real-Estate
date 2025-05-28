@@ -1,4 +1,9 @@
+import React from "react";
+import { useCurrency } from "../contexts/CurrencyContext"; // Adjust path if needed
+
 export default function PropertyCard({ data }) {
+  const { convertPrice, currency } = useCurrency();
+
   return (
     <div className="h-full bg-white rounded-xl shadow-md overflow-hidden font-sans transition hover:shadow-lg flex flex-col">
       <div className="relative">
@@ -22,8 +27,9 @@ export default function PropertyCard({ data }) {
         </div>
 
         <p className="text-md text-gray-500">📐 {data.area}</p>
+
         <p className="text-md font-bold text-black">
-          ${parseInt(data.price).toLocaleString()}
+          {convertPrice(parseFloat(data.price))} {currency}
         </p>
 
         <div className="mt-auto">
