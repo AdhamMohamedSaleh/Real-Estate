@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white mt-16">
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Deals</h3>
           <p className="text-sm text-gray-400">
@@ -65,7 +65,8 @@ export default function Footer() {
               📘
             </a>
           </div>
-
+        </div>
+        <div>
           <label
             htmlFor="currency"
             className="text-sm font-semibold block mb-2"

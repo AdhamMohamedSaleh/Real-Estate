@@ -34,8 +34,8 @@ export default function PropertyDetails() {
 
   return (
     <div className="max-w-6xl mx-auto p-4 mt-30">
-      <Link to="/units" className="text-blue-600 text-sm mb-4 inline-block">
-        &larr; Back to Units
+      <Link to="/dashboard" className="text-blue-600 text-sm mb-4 inline-block">
+        &larr; Back to Dashboard
       </Link>
 
       <div className="bg-white rounded-xl shadow overflow-hidden">
