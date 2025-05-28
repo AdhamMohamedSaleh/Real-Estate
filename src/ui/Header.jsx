@@ -8,7 +8,7 @@ function Header() {
         <img
           src="/logo_black.png"
           alt="logo"
-          className="h-16 transition-all duration-300 w-[228px] ease-in-out hover:scale-105"
+          className="h-10 w-[150px] transition-all duration-300 ease-in-out hover:scale-105"
         />
       </Link>
       <Button variant="default">Contact Us</Button>

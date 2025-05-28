@@ -31,7 +31,7 @@ export default function PropertyDetails() {
     );
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4 mt-30">
       {/* Back Button */}
       <Link to="/units" className="text-blue-600 text-sm mb-4 inline-block">
         &larr; Back to Units

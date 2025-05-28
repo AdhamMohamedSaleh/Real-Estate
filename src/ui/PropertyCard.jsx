@@ -27,9 +27,7 @@ export default function PropertyCard({ data }) {
         </p>
 
         <div className="mt-auto">
-          <a href="#" className="text-blue-600 text-md inline-block">
-            View Details
-          </a>
+          <p className="text-blue-600 text-md inline-block">View Details</p>
         </div>
       </div>
     </div>
