@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
 import Spinner from "../ui/Spinner";
+import { useParams, Link } from "react-router-dom";
 import { useCurrency } from "../contexts/CurrencyContext";
 
-const URL = "https://quick-deals.net/api/product-detail/";
+const URL = "https://quick-deals.vercel.app/api/product-detail/";
 
 export default function PropertyDetails() {
   const { id } = useParams();

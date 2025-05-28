@@ -3,6 +3,8 @@ import PropertyCard from "../ui/PropertyCard"; // adjust path
 import Spinner from "../ui/Spinner";
 import { Link } from "react-router-dom";
 
+const URL = "https://quick-deals.vercel.app/api/home-products/";
+
 export default function Dashboard() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchProperties() {
       try {
-        const res = await fetch("https://quick-deals.net/api/home-products", {
+        const res = await fetch(URL, {
           cache: "no-store",
         });
         const data = await res.json();
