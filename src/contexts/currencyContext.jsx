@@ -24,7 +24,7 @@ export function CurrencyProvider({ children }) {
   }, [currency]);
 
   function convertPrice(amount) {
-    return (amount * conversionRates[currency]).toFixed(2);
+    return Math.round(amount * conversionRates[currency]);
   }
 
   return (
