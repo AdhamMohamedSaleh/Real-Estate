@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCurrency } from "../contexts/currencyContext";
+import { useCurrency } from "../contexts/CurrencyContext";
 
 export default function Footer() {
   const { currency, setCurrency } = useCurrency();
