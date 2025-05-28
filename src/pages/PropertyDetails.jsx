@@ -114,7 +114,7 @@ export default function PropertyDetails() {
             {property.images.map((img, index) => (
               <img
                 key={index}
-                src={img}
+                src={img.image_url.replace(/\?$/, "")}
                 alt={`Gallery ${index + 1}`}
                 className="rounded shadow-sm object-cover h-40 w-full"
               />
