@@ -1,5 +1,5 @@
 import React from "react";
-import { useCurrency } from "../contexts/CurrencyContext"; // Adjust path if needed
+import { useCurrency } from "../contexts/CurrencyContext";
 
 export default function PropertyCard({ data }) {
   const { convertPrice, currency } = useCurrency();
