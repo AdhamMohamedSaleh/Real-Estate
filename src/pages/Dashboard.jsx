@@ -49,7 +49,7 @@ export default function Dashboard() {
       ) : properties.length === 0 ? (
         <p className="text-center text-gray-500 mb-10">No properties found.</p>
       ) : (
-        <div className="mx-4 sm:mx-6 md:mx-65">
+        <div className="mx-4 sm:mx-6 md:mx-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 my-10">
             {properties.map((property) => (
               <div key={property.id} className="h-[500px]">
