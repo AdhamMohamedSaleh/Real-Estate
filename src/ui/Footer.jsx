@@ -44,7 +44,7 @@ export default function Footer() {
 
         <div>
           <h4 className="font-semibold mb-3">Contact</h4>
-          <p className="text-sm text-gray-400">📍 Aswan, Egypt</p>
+          <p className="text-sm text-gray-400">📍 Hurghada, Egypt</p>
           <p className="text-sm text-gray-400">📞 +20 123 456 7890</p>
           <p className="text-sm text-gray-400">✉️ info@quick-deals.net</p>
         </div>
@@ -54,9 +54,6 @@ export default function Footer() {
           <div className="flex gap-4 text-xl mb-4">
             <a href="#" className="hover:text-blue-400">
               🌐
-            </a>
-            <a href="#" className="hover:text-blue-400">
-              🐦
             </a>
             <a href="#" className="hover:text-blue-400">
               📸
