@@ -1,39 +1,27 @@
-import React, { useEffect, useState } from "react";
-import PropertyCard from "../ui/PropertyCard"; // adjust path
+import React from "react";
+import PropertyCard from "../ui/PropertyCard";
 import Spinner from "../ui/Spinner";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const URL = "https://quick-deals.vercel.app/api/home-products/";
 
 export default function Dashboard() {
-  const [properties, setProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
-
-  useEffect(() => {
-    async function fetchProperties() {
-      try {
-        const res = await fetch(URL, {
-          cache: "no-store",
-        });
-        const data = await res.json();
-        setProperties(data.results || []);
-      } catch (error) {
-        console.error("Failed to fetch properties:", error);
-        setProperties([]);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProperties();
-  }, []);
-
-  const totalPages = Math.ceil(properties.length / itemsPerPage);
-  const paginatedProperties = properties.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const {
+    data: properties = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["properties"],
+    queryFn: async () => {
+      const res = await fetch(URL);
+      if (!res.ok) throw new Error("Network response was not ok");
+      const data = await res.json();
+      return data.results || [];
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes cache
+  });
 
   return (
     <div>
@@ -52,43 +40,22 @@ export default function Dashboard() {
         Our Properties
       </h2>
 
-      {loading ? (
+      {isLoading ? (
         <Spinner />
+      ) : isError ? (
+        <p className="text-center text-red-500 my-10">{error.message}</p>
       ) : properties.length === 0 ? (
         <p className="text-center text-gray-500 mb-10">No properties found.</p>
       ) : (
         <div className="mx-4 sm:mx-6 md:mx-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 my-10">
-            {paginatedProperties.map((property) => (
+            {properties.map((property) => (
               <div key={property.id} className="h-[500px]">
                 <Link to={`/property/${property.id}`} className="h-full block">
                   <PropertyCard data={property} />
                 </Link>
               </div>
             ))}
-          </div>
-
-          {/* Pagination Controls */}
-          <div className="flex justify-center items-center mt-8 gap-4">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <span className="text-gray-500 text-sm">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
-              }
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
-            >
-              Next
-            </button>
           </div>
         </div>
       )}
