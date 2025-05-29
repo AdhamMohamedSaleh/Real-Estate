@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCurrency } from "../contexts/CurrencyContext";
+import { FaInstagram, FaFacebook } from "react-icons/fa"; // Added icons
 
 export default function Footer() {
   const { currency, setCurrency } = useCurrency();
@@ -51,18 +52,28 @@ export default function Footer() {
 
         <div>
           <h4 className="font-semibold mb-3">Follow Us</h4>
-          <div className="flex gap-4 text-xl mb-4">
-            <a href="#" className="hover:text-blue-400">
-              🌐
+          <div className="flex gap-4 text-2xl mb-4">
+            <a
+              href="https://www.instagram.com/quickdeals545/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-pink-500"
+              aria-label="Instagram"
+            >
+              <FaInstagram />
             </a>
-            <a href="#" className="hover:text-blue-400">
-              📸
-            </a>
-            <a href="#" className="hover:text-blue-400">
-              📘
+            <a
+              href="https://www.facebook.com/profile.php?id=61576620510853&mibextid=wwXIfr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500"
+              aria-label="Facebook"
+            >
+              <FaFacebook />
             </a>
           </div>
         </div>
+
         <div>
           <label
             htmlFor="currency"
@@ -74,7 +85,7 @@ export default function Footer() {
             id="currency"
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
-            className="text-white px-2 py-1 rounded text-sm"
+            className="text-white bg-gray-800 px-2 py-1 rounded text-sm"
           >
             <option className="text-black" value="USD">
               USD ($)
