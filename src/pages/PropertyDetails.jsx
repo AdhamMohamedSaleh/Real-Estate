@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Spinner from "../ui/Spinner";
 import { useParams, Link } from "react-router-dom";
 import { useCurrency } from "../contexts/CurrencyContext";
+import { useQuery } from "@tanstack/react-query";
 
 const URL = "https://quick-deals.vercel.app/api/product-detail/";
 
 export default function PropertyDetails() {
   const { id } = useParams();
-  const [property, setProperty] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { convertPrice, currency } = useCurrency(); // <- Get currency name
+  const { convertPrice, currency } = useCurrency();
 
-  useEffect(() => {
-    async function fetchProperty() {
-      try {
-        const res = await fetch(`${URL}${id}`);
-        const data = await res.json();
-        setProperty(data);
-      } catch (error) {
-        console.error("Failed to fetch property details", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProperty();
-  }, [id]);
+  const {
+    data: property,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["property", id],
+    queryFn: async () => {
+      const res = await fetch(`${URL}${id}`);
+      if (!res.ok) throw new Error("Failed to fetch property details");
+      return res.json();
+    },
+    enabled: !!id, // only run if ID is present
+    staleTime: 5 * 60 * 1000, // cache for 5 mins
+  });
 
-  if (loading) return <Spinner />;
-  if (!property)
+  if (isLoading) return <Spinner />;
+  if (isError || !property)
     return (
-      <div className="text-center mt-10 text-red-500">No property found</div>
+      <div className="text-center mt-10 text-red-500">
+        {error?.message || "No property found"}
+      </div>
     );
 
   return (
