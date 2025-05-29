@@ -47,7 +47,17 @@ export default function Footer() {
           <h4 className="font-semibold mb-3">Contact</h4>
           <p className="text-sm text-gray-400">📍 Hurghada, Egypt</p>
           <p className="text-sm text-gray-400">📞 +20 123 456 7890</p>
-          <p className="text-sm text-gray-400">✉️ info@quick-deals.net</p>
+          <p className="text-sm text-gray-400">
+            ✉️ Info{" "}
+            <a
+              href="https://www.quick-deals.net"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:underline"
+            >
+              www.quick-deals.net
+            </a>
+          </p>
         </div>
 
         <div>
