@@ -74,14 +74,7 @@ export default function PropertyDetails() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-2">
-              <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">
-                Edit
-              </button>
-              <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-                Delete
-              </button>
-            </div>
+            <div className="flex gap-2"></div>
           </div>
 
           <div className="mt-6 text-gray-700 leading-relaxed">
