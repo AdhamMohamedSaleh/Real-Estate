@@ -24,7 +24,8 @@ export function CurrencyProvider({ children }) {
   }, [currency]);
 
   function convertPrice(amount) {
-    return Math.round(amount * conversionRates[currency]);
+    const convertedAmount = Math.round(amount * conversionRates[currency]);
+    return convertedAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   return (
