@@ -1,14 +1,13 @@
 import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import PropertyCard from "../ui/PropertyCard";
 import Spinner from "../ui/Spinner";
-import ImageSlider from "../ui/ImageSlider";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 
 const URL = "https://quick-deals.vercel.app/api/home-products/";
 const ITEMS_PER_PAGE = 12;
 
-export default function Dashboard() {
+export default function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const {
@@ -17,7 +16,7 @@ export default function Dashboard() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["properties"],
+    queryKey: ["all-properties"],
     queryFn: async () => {
       const res = await fetch(URL);
       if (!res.ok) throw new Error("Network response was not ok");
@@ -42,22 +41,30 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
-      <ImageSlider />
+    <div className="max-w-7xl mx-auto px-4 py-20 mt-20">
+      {/* Hero Section */}
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-light text-gray-900 mb-4">Our Properties</h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Discover our exclusive collection of premium properties. From luxury villas to beachfront apartments, 
+          find your perfect investment in Egypt's most prestigious locations.
+        </p>
+      </div>
 
-      <h2 className="text-3xl font-semibold my-10 mb-16 text-center">
-        Our Properties
-      </h2>
-
+      {/* Properties Grid */}
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        <p className="text-center text-red-500 my-10">{error.message}</p>
+        <div className="text-center text-red-500 my-10">
+          {error.message}
+        </div>
       ) : paginatedProperties.length === 0 ? (
-        <p className="text-center text-gray-500 mb-10">No properties found.</p>
+        <div className="text-center text-gray-500 my-10">
+          No properties found.
+        </div>
       ) : (
-        <div className="mx-4 sm:mx-6 md:mx-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 my-10">
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {paginatedProperties.map((property) => (
               <div key={property.id} className="h-[500px]">
                 <Link to={`/property/${property.id}`} className="h-full block">
@@ -68,11 +75,11 @@ export default function Dashboard() {
           </div>
 
           {/* Pagination Controls */}
-          <div className="flex justify-center items-center gap-4 my-8">
+          <div className="flex justify-center items-center gap-4 mt-12">
             <button
               onClick={handlePrev}
               disabled={currentPage === 1}
-              className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+              className="px-4 py-2 rounded-md bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Previous
             </button>
@@ -82,13 +89,13 @@ export default function Dashboard() {
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+              className="px-4 py-2 rounded-md bg-gray-900 text-white hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Next
             </button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
-}
+} 

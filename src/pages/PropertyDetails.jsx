@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Spinner from "../ui/Spinner";
 import { useParams, Link } from "react-router-dom";
 import { useCurrency } from "../contexts/CurrencyContext";
 import { useQuery } from "@tanstack/react-query";
+import ImageModal from "../ui/ImageModal";
 
 const URL = "https://quick-deals.vercel.app/api/product-detail/";
 
 export default function PropertyDetails() {
   const { id } = useParams();
   const { convertPrice, currency } = useCurrency();
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const {
     data: property,
@@ -45,7 +47,8 @@ export default function PropertyDetails() {
           <img
             src={property.main_image}
             alt={property.title}
-            className="w-full h-[350px] object-cover"
+            className="w-full h-[350px] object-cover cursor-pointer hover:opacity-90 transition-opacity"
+            onClick={() => setSelectedImage(property.main_image)}
           />
           <span className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 text-xs rounded-full">
             Available
@@ -107,11 +110,20 @@ export default function PropertyDetails() {
                 key={index}
                 src={img.image_url.replace(/\?$/, "")}
                 alt={`Gallery ${index + 1}`}
-                className="rounded shadow-sm object-cover h-40 w-full"
+                className="rounded shadow-sm object-cover h-40 w-full cursor-pointer hover:opacity-90 transition-opacity"
+                onClick={() => setSelectedImage(img.image_url.replace(/\?$/, ""))}
               />
             ))}
           </div>
         </div>
+      )}
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <ImageModal
+          imageUrl={selectedImage}
+          onClose={() => setSelectedImage(null)}
+        />
       )}
     </div>
   );

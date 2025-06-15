@@ -11,7 +11,9 @@ function Header() {
           className="h-10 w-[150px] transition-all duration-300 ease-in-out hover:scale-105"
         />
       </Link>
-      <Button variant="default">Contact Us</Button>
+      <Link to="/contact">
+        <Button className="cursor-pointer" variant="default">Contact Us</Button>
+      </Link>
     </div>
   );
 }
